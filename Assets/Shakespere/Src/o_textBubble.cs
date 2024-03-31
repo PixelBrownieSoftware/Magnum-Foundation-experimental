@@ -6,6 +6,19 @@ using UnityEngine.UI;
 using System;
 using TMPro;
 
+//From: https://gist.github.com/aarthificial/d2064b363ab4244988c5866f23fa4d3a
+public static class PlayableDirectorExtensions
+{
+    public static void Freeze(this PlayableDirector director)
+    {
+        director.playableGraph.GetRootPlayable(0).SetSpeed(0);
+    }
+
+    public static void Unfreeze(this PlayableDirector director)
+    {
+        director.playableGraph.GetRootPlayable(0).SetSpeed(1);
+    }
+}
 public class o_textBubble : MonoBehaviour
 {
     public TextMeshProUGUI text;
@@ -35,7 +48,7 @@ public class o_textBubble : MonoBehaviour
     }
 
     public bool directorPaused() {
-        return director.timelinePaused();
+        return director.state == PlayState.Paused;
     }
 
     public void PauseDirector() {
@@ -59,7 +72,7 @@ public class o_textBubble : MonoBehaviour
         if (m_timer > 0) {
             m_timer = m_timer - Time.deltaTime;
             if (m_timer <= 0) {
-                director.UnFreeze();
+                director.Unfreeze();
             }
         }
         transform.rotation = Quaternion.identity;
