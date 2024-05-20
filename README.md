@@ -1,4 +1,9 @@
 # Magnum-Foundation-experimental
+### Required packages
+Go to Window -> Package manager and install the following:
+- Input System
+- 2D tilemap
+- 2D sprite
 
 # Shakespere (Assets/Shakespere/)
 This is the dialogue system I made which uses unity timeline.
